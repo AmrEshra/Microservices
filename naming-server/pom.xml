@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.rest.microservices</groupId>
 	<artifactId>naming-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>naming-server</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -56,8 +56,23 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+					      <!-- docker ID / artifactId : version(tag)-->
+						<name>amreshra/${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+	</repositories>
 
 </project>
