@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: currency-exchange-service
+Implementation-Title: currency-exchange-service-K8S
 Implementation-Version: 0.1
 Build-Jdk-Spec: 1.8
 Created-By: Maven Integration for Eclipse
