@@ -23,6 +23,7 @@ kubectl delete service .......
 -------------------------------------------
 #Scale it
 
+
 kubectl scale deploy/currency-exchange-service-k8 --replicas 2
 kubectl scale deployment my-nginx --replicas 2
 kubectl get all
