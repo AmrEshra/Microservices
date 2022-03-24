@@ -1,0 +1,58 @@
+# push container to docker hub
+docker login
+docker push amreshra/currency-exchange-service-k8s:0.1
+-----------------------------------------------------------
+
+# deploy with kubectl
+
+kubectl version
+
+kubectl create deployment currency-exchange-service-k8s --image=amreshra/currency-exchange-service-k8s:0.1
+
+kubectl expose deployment currency-exchange-service-k8s --type=LoadBalancer --port=8300
+
+kubectl get service
+
+kubectl get pods
+
+kubectl get all
+
+kubectl delete pod/........
+kubectl delete deployment .......
+kubectl delete service .......
+-------------------------------------------
+#Scale it
+
+kubectl scale deploy/currency-exchange-service-k8 --replicas 2
+kubectl scale deployment my-nginx --replicas 2
+kubectl get all
+
+-------------------------------
+#kubectl expose
+
+kubectl get pods -w
+kubectl create deployment httpenv --image=bretfisher/httpenv (default ClusterIP)
+kubectl scale deployment/httpenv --replicas=5
+kubectl expose deployment/httpenv --port 8888
+
+kubectl get service
+
+#(expose to NodePort)
+kubectl expose deployment/httpenv --port 8888 --name httpenv-np --type NodePort
+
+#(expose to LoadBalancer)
+kubectl expose deployment/httpenv --port 8888 --name httpenv-lb --type LoadBalancer
+
+kubectl delete service/httpenv
+-------------------------------
+#create yaml with kubectl
+
+kubectl create deployment sample --image nginx --dry-run -o yaml
+kubectl expose deployment/test --port 80 --dry-run -o -yaml
+
+kubectl create deployment test --image nginx
+
+kubectl expose deployment/test --port 80 --dry-run -o -yaml
+-------------------------------
+
+kubectl run my-nginx --image nginx --replicas 2 --dry-run -o yaml
