@@ -24,40 +24,11 @@ kubectl get service  currency-exchange-service-k8s -o yaml >> service.yaml
 kubectl delete all -l app=currency-exchange-service-k8s
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+
+
 -------------------------------------------
 #Scale it
 
+kubectl scale deployment currency-exchange-service-k8s --replicas 2
 
-kubectl scale deploy/currency-exchange-service-k8 --replicas 2
-kubectl scale deployment.app/currency-exchange-service-k8 --replicas 2
-kubectl get all
-
--------------------------------
-#kubectl expose
-
-kubectl get pods -w
-kubectl create deployment httpenv --image=bretfisher/httpenv (default ClusterIP)
-kubectl scale deployment/httpenv --replicas=5
-kubectl expose deployment/httpenv --port 8888
-
-kubectl get service
-
-#(expose to NodePort)
-kubectl expose deployment/httpenv --port 8888 --name httpenv-np --type NodePort
-
-#(expose to LoadBalancer)
-kubectl expose deployment/httpenv --port 8888 --name httpenv-lb --type LoadBalancer
-
-kubectl delete service/httpenv
--------------------------------
-#create yaml with kubectl
-
-kubectl create deployment sample --image nginx --dry-run -o yaml
-kubectl expose deployment/test --port 80 --dry-run -o -yaml
-
-kubectl create deployment test --image nginx
-
-kubectl expose deployment/test --port 80 --dry-run -o -yaml
--------------------------------
-
-kubectl run my-nginx --image nginx --replicas 2 --dry-run -o yaml
+kubectl autoscale deployment currency-exchange-service-k8s --min=1 --max=6
