@@ -6,26 +6,30 @@ docker push amreshra/currency-exchange-service-k8s:0.1
 # deploy with kubectl
 
 kubectl version
-
 kubectl create deployment currency-exchange-service-k8s --image=amreshra/currency-exchange-service-k8s:0.1
-
 kubectl expose deployment currency-exchange-service-k8s --type=LoadBalancer --port=8300
 
 kubectl get service
-
 kubectl get pods
-
 kubectl get all
 
 kubectl delete pod/........
 kubectl delete deployment .......
 kubectl delete service .......
+
+kubectl get deployment currency-exchange-service-k8s -o yaml >> deployment.yaml
+kubectl get service  currency-exchange-service-k8s -o yaml >> service.yaml
+
+# then change in file generated
+kubectl delete all -l app=currency-exchange-service-k8s
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
 -------------------------------------------
 #Scale it
 
 
 kubectl scale deploy/currency-exchange-service-k8 --replicas 2
-kubectl scale deployment my-nginx --replicas 2
+kubectl scale deployment.app/currency-exchange-service-k8 --replicas 2
 kubectl get all
 
 -------------------------------

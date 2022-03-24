@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2022-03-24T11:12:21Z"
+  generation: 1
+  labels:
+    app: currency-exchange-service-k8s
+  name: currency-exchange-service-k8s
+  namespace: default
+  resourceVersion: "23954"
+  uid: 61fd0dc3-f173-44a1-9e64-2a000ebebd30
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: currency-exchange-service-k8s
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: currency-exchange-service-k8s
+    spec:
+      containers:
+      - image: amreshra/currency-exchange-service-k8s:0.1
+        imagePullPolicy: IfNotPresent
+        name: currency-exchange-service-k8s
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2022-03-24T11:12:24Z"
+    lastUpdateTime: "2022-03-24T11:12:24Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2022-03-24T11:12:21Z"
+    lastUpdateTime: "2022-03-24T11:12:24Z"
+    message: ReplicaSet "currency-exchange-service-k8s-6bf6848b8f" has successfully
+      progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
